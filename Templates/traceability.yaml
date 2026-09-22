@@ -1,0 +1,74 @@
+# build-image-skill traceability template
+# Copy this file for a new build, complete meta, then append formal items.
+# Comments describe item shapes; empty sequences contain no placeholder data.
+# Entity status values: active | provisional | deprecated | rejected.
+
+meta:
+  schema_version: "1.0"
+  target_skill: null
+  build_id: null
+  build_version: null
+  updated_at: null
+
+# REF item:
+# id, location{source_file, source_section, source_item}, role,
+# status, downstream{observations[]}, notes
+references: []
+
+# OBS item:
+# id, statement, analysis_dimensions[],
+# evidence{source_refs[], contradicting_refs[]}, confidence, importance,
+# status, location{source_file, source_section, source_item},
+# downstream{invariants[], variations[], anti_patterns[]}, notes
+observations: []
+
+# INV item:
+# id, statement,
+# evidence{source_refs[], supporting_observations[], contradicting_refs[]},
+# confidence, importance, status,
+# location{source_file, source_section, source_item},
+# downstream{visual_rules[], skill_rules[], test_cases[]}, notes
+invariants: []
+
+# VAR item: same evidence and location shape as INV.
+# downstream{visual_rules[], skill_rules[], test_cases[]}
+variations: []
+
+# ANTI item: same evidence and location shape as INV.
+# downstream{visual_rules[], skill_rules[], test_cases[]}
+anti_patterns: []
+
+# VR item:
+# id, statement, source_roles[], rule_strength, status,
+# location{source_file, source_section, source_item},
+# downstream{prompt_rules[], quality_rules[], skill_rules[]}, notes
+visual_rules: []
+
+# PR item:
+# id, statement, source_visual_rules[], rule_strength, status,
+# location{source_file, source_section, source_item},
+# downstream{skill_rules[]}, notes
+prompt_rules: []
+
+# QR item: same shape as PR.
+quality_rules: []
+
+# SK item:
+# id, statement, source_rules[], rule_strength, status,
+# location{source_file, source_section, source_item},
+# downstream{test_cases[]}, notes
+skill_rules: []
+
+# TC item:
+# id, title, case_type{Core|Variation|Stress|Boundary}, verifies[], status,
+# location{source_file, source_section, source_item}, notes
+# verifies[] contains active INV / VAR / ANTI / SK IDs. Related VR / PR / QR
+# remain reachable through SK source_rules. status is entity lifecycle status,
+# not the PASS / PASS WITH VARIANCE / FAIL / BLOCKED test-result verdict.
+test_cases: []
+
+# Revision item:
+# sequence, entity_id, change, reason, evidence_ids[], prior_status,
+# new_status, predecessor, successor,
+# location{source_file, source_section, source_item}, notes
+revisions: []
